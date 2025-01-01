@@ -1,0 +1,11 @@
+services:
+  web:
+    build:
+      args:
+        BLACKFIRE_ENABLE: ${BLACKFIRE_ENABLE}
+
+  blackfire:
+    image: blackfire/blackfire:2
+    ports: ["8307"]
+    env_file:
+      - .env

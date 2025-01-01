@@ -1,0 +1,97 @@
+.
+|-- .env
+|-- .gitignore
+|-- README.md
+|-- docker
+|   |-- logs
+|   |   |-- nginx
+|   |   `-- php
+|   |-- mariadb
+|   |   `-- conf
+|   |       `-- custom.cnf
+|   |-- modx
+|   |   |-- storage
+|   |   |   |-- backup
+|   |   |   `-- cache
+|   |   `-- tools
+|   |       `-- configurator
+|   |           |-- composer.json
+|   |           |-- config.inc.php
+|   |           |-- example.config.inc.php
+|   |           |-- run.php
+|   |           |-- src
+|   |           |   |-- Runner
+|   |           |   |   |-- Runner.php
+|   |           |   |   `-- RunnerInterface.php
+|   |           |   |-- Tasks
+|   |           |   |   |-- GrantAccessUserTask.php
+|   |           |   |   |-- InstallPackagesTask.php
+|   |           |   |   |-- MiniShop2Task.php
+|   |           |   |   |-- SetOptionsTask.php
+|   |           |   |   |-- Task.php
+|   |           |   |   |-- TaskInterface.php
+|   |           |   |   `-- TransportProvidersTask.php
+|   |           |   |-- Traits
+|   |           |   |   |-- DocumentTrait.php
+|   |           |   |   |-- ElementsTrait.php
+|   |           |   |   |-- InitializeTrait.php
+|   |           |   |   |-- OptionTrait.php
+|   |           |   |   |-- PropertiesTrait.php
+|   |           |   |   |-- SecurityTrait.php
+|   |           |   |   `-- TransportProviderTrait.php
+|   |           |   `-- Utils
+|   |           |       `-- Logger.php
+|   |           `-- storage
+|   |               `-- ms2
+|   |                   |-- demo
+|   |                   |   |-- categories.csv
+|   |                   |   |-- products
+|   |                   |   |-- products.csv
+|   |                   |   |-- vendors
+|   |                   |   `-- vendors.csv
+|   |                   |-- pages
+|   |                   |   |-- cart.tpl
+|   |                   |   `-- category.tpl
+|   |                   `-- templates
+|   |                       |-- cart.tpl
+|   |                       |-- category.tpl
+|   |                       `-- product.tpl
+|   |-- nginx
+|   |   |-- default.conf.template
+|   |   `-- ssl
+|   |-- php
+|   |   |-- Dockerfile
+|   |   |-- conf
+|   |   |   |-- opcache.ini
+|   |   |   |-- php.ini
+|   |   |   |-- xdebug.ini
+|   |   |   `-- xhprof.ini
+|   |   |-- sh
+|   |   |   |-- modx-clear-db.sh
+|   |   |   |-- modx-clear-site.sh
+|   |   |   |-- modx-configure.sh
+|   |   |   |-- modx-docker-start.sh
+|   |   |   |-- modx-download.sh
+|   |   |   |-- modx-export.sh
+|   |   |   |-- modx-generate-ssl.sh
+|   |   |   |-- modx-import.sh
+|   |   |   |-- modx-install.sh
+|   |   |   |-- modx-uninstall.sh
+|   |   |   `-- modx-upgrade.sh
+|   |   `-- xhprof
+|   |       |-- composer.json
+|   |       `-- handler.php
+|   |-- volume
+|   |   `-- mariadb
+|   `-- xhgui
+|       |-- Dockerfile
+|       |-- apache.conf
+|       |-- config.php
+|       `-- mongo.init.d
+|           `-- xhgui.js
+|-- docker-compose.override.blackfire.yml
+|-- docker-compose.override.xhprof.yml
+|-- docker-compose.yml
+`-- www
+
+36 directories, 59 files

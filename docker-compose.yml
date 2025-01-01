@@ -1,0 +1,85 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "443:443"
+      - "${NGINX_PORT}:80"
+    volumes:
+      - ./www:${ROOT_PATH}
+      - ./docker/nginx/ssl:${SSL_PATH}
+      - ./docker/logs/nginx:/var/log/nginx
+      - ./docker/nginx/default.conf.template:/etc/nginx/templates/default.conf.template
+    env_file:
+      - .env
+    depends_on:
+      - web
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    volumes:
+      - ./docker/volume/mariadb:/var/lib/mysql
+      - ./docker/mariadb/conf/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro
+    ports:
+      - "${MARIADB_PORT}:3306"
+    environment:
+      MYSQL_DATABASE: ${MODX_DB_NAME}
+      MYSQL_USER: ${MODX_DB_USER}
+      MYSQL_PASSWORD: ${MODX_DB_PASSWORD}
+    env_file:
+      - .env
+
+  web:
+    container_name: "php-${PHP_VERSION}"
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+      args:
+        SMTP_PORT: ${SMTP_PORT}
+        SMTP_HOST: ${SMTP_HOST}
+        ROOT_PATH: ${ROOT_PATH}
+        PHP_VERSION: ${PHP_VERSION}
+        XDEBUG_ENABLE: ${XDEBUG_ENABLE}
+        SSH_ENABLE: ${SSH_ENABLE}
+        SSH_LOGIN: ${SSH_LOGIN}
+        SSH_PASSWORD: ${SSH_PASSWORD}
+    volumes:
+      - ./www:${ROOT_PATH}
+      - ./docker/logs/php:/var/log/php-fpm
+      - ./docker/nginx/ssl:${SSL_PATH}
+      - ./docker/modx/tools:/usr/local/modx/tools
+      - ./docker/modx/storage:/usr/local/modx/storage
+      - ./docker/php/conf/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./docker/php/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./docker/php/conf/xhprof.ini:/usr/local/etc/php/conf.d/xhprof.ini
+      - ./docker/php/conf/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+    environment:
+      MODX_RESET: ${MODX_RESET:-0}
+      MODX_IMPORT: ${MODX_IMPORT:-0}
+    env_file:
+      - .env
+    ports:
+      - "2222:22"
+    depends_on:
+      - mariadb
+    # restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: ${PHPMYADMIN_UPLOAD_LIMIT:-100M}
+    ports:
+      - "${PHPMYADMIN_PORT}:80"
+    depends_on:
+      - mariadb
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "${MAILHOG_PORT}:8025"
+      - "${SMTP_PORT}:1025"

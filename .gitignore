@@ -1,0 +1,6 @@
+.idea/
+*.key
+*.pem
+*.crt
+*.csr
+*.logxw

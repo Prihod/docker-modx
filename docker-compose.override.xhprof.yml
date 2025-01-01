@@ -1,0 +1,30 @@
+services:
+  web:
+    build:
+      args:
+        XHPROF_ENABLE: ${XHPROF_ENABLE}
+  mongo:
+    image: mongo:latest
+    container_name: xhgui-mongo
+    volumes:
+      - mongo_data:/data/db
+      - ./docker/xhgui/mongo.init.d:/docker-entrypoint-initdb.d
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=xhprof
+    command: --storageEngine=wiredTiger
+  xhgui:
+    build:
+      context: ./docker/xhgui
+      dockerfile: Dockerfile
+    container_name: xhgui
+    ports:
+      - "${XHGUI_PORT}:80"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
