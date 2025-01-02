@@ -5,7 +5,7 @@ $config['tasks'] = [
     'TransportProvidersTask',
     'InstallPackagesTask',
     'SetOptionsTask',
-    'GrantAccessUserTask',
+    //'GrantAccessUserTask',
     //'MiniShop2Task',
 ];
 
@@ -13,8 +13,8 @@ $config['transport_providers'] = [
     'modstore.pro' => [
         'name' => 'modstore.pro',
         'service_url' => 'https://modstore.pro/extras/',
-        'username' => 'prihod2004@gmail.com',
-        'api_key' => '7a18b7b2a5a759dc077ee60060cdbd18',
+        'username' => '',
+        'api_key' => '',
     ],
 ];
 $config['install_packages'] = [
