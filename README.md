@@ -18,7 +18,7 @@ docker-compose up -d
 
 View MODX installation log
 ```bash
-docker-compose logs -f web
+docker-compose logs -f php
 ```
 
 ### URL list
@@ -171,7 +171,7 @@ MODX_RESET=1 docker-compose up -d
 
 ### Export Data
 ```bash
-docker-compose exec web modx-export.sh
+docker-compose exec php modx-export.sh
 ```
 Data is saved in `./docker/modx/storage/backup`
 
@@ -216,7 +216,7 @@ All project settings are in the `.env` file. Below are the main parameters:
 | MODX_EXPORT_OVERWRITE_CONFIG | 0             | Overwrite configuration files data during export with values from `MODX_EXPORT_...` variables                     |
 | XDEBUG_ENABLE                | 0             | Install Xdebug extension for PHP-FPM                                                                              |
 | XHPROF_ENABLE                | 0             | Install Xhprof extension for PHP-FPM                                                                              |
-| SSH_ENABLE                   | 1             | Enable SSH for `web` container                                                                                    |
+| SSH_ENABLE                   | 1             | Enable SSH for `php` container                                                                                    |
 | SSL_GENERATE                 | 1             | Generate self-signed SSL certificate                                                                              |
 | NGINX_PORT                   | 80            | NGINX port                                                                                                        |
 | MARIADB_PORT                 | 3306          | MariaDB port                                                                                                      |
@@ -236,7 +236,7 @@ The script executes tasks specified in the `config.inc.php` configuration file i
 When `MODX_CONFIGURE_DEV_MODE = 1`, after completing all tasks, MODX cache and logs won't be cleared, and the `./www/core/configurator` directory won't be deleted, allowing manual configuration script execution during development.
 
 ```sh
-docker-compose exec web bash && php /var/www/html/core/configurator/run.php
+docker-compose exec php bash && php /var/www/html/core/configurator/run.php
 ```
 
 #### Available Configuration Tasks
@@ -311,5 +311,5 @@ BLACKFIRE_SERVER_TOKEN=<server_token>
 When changing configuration, rebuild the container:
 
 ```bash
-docker-compose build --no-cache web
+docker-compose build --no-cache php
 ```

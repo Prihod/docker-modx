@@ -16,7 +16,7 @@ docker-compose up -d
 ```
 Просмотр лога установки MODX
 ```bash
-docker-compose logs -f web
+docker-compose logs -f php
 ```
 
 ### Список URL
@@ -170,7 +170,7 @@ MODX_RESET=1 docker-compose up -d
 
 ### Экспорт данных
 ```bash
-docker-compose exec web modx-export.sh
+docker-compose exec php modx-export.sh
 ```
 Данные сохраняются в `./docker/modx/storage/backup`
 
@@ -215,7 +215,7 @@ ssh dev@127.0.0.1 -p 2222  # Логин: dev, Пароль: dev
 | MODX_EXPORT_OVERWRITE_CONFIG | 0                         | При экспорте перезаписывать данные в конфигурационных файлах MODX на значения из `MODX_EXPORT_...` переменных            | |
 | XDEBUG_ENABLE                | 0                         | Установить для PHP-FPM расширение Xdebug                                                                                 |
 | XHPROF_ENABLE                | 0                         | Установить для PHP-FPM расширение Xhprof                                                                                 |
-| SSH_ENABLE                   | 1                         | Разрешить SSH для контейнера `web`                                                                                       |
+| SSH_ENABLE                   | 1                         | Разрешить SSH для контейнера `php`                                                                                       |
 | SSL_GENERATE                 | 1                         | Генерировать самоподписанный SSL сертификат                                                                              |
 | NGINX_PORT                   | 80                        | Порт для NGINX                                                                                                           |
 | MARIADB_PORT                 | 3306                      | Порт для MariaDB                                                                                                         |
@@ -235,7 +235,7 @@ ssh dev@127.0.0.1 -p 2222  # Логин: dev, Пароль: dev
 При `MODX_CONFIGURE_DEV_MODE = 1`, после выполнения всех задач не будет происходить очистка кэша и логов MODX, а также удаление директории `./www/core/configurator`, что позволяет вручную запускать скрипт конфигурации во время разработки.
 
 ```sh
-docker-compose exec web bash && php /var/www/html/core/configurator/run.php
+docker-compose exec php bash && php /var/www/html/core/configurator/run.php
 ```
 
 #### Доступные задачи конфигурации
@@ -309,5 +309,5 @@ BLACKFIRE_SERVER_TOKEN=<server_token>
 
 При изменении конфигурации пересоберите контейнер:
 ```bash
-docker-compose build --no-cache web
+docker-compose build --no-cache php
 ```

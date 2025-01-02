@@ -30,7 +30,7 @@ services:
     env_file:
       - .env
 
-  web:
+  php:
     container_name: "php-${PHP_VERSION}"
     build:
       context: ./docker/php
