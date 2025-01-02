@@ -1,6 +1,6 @@
 <?php
 
-if (extension_loaded('xhprof') && !empty($_SERVER['XHPROF_ENABLE'])) {
+if (extension_loaded('xhprof')) {
     require_once __DIR__ . '/vendor/autoload.php';
     xhprof_enable(XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
     register_shutdown_function(function () {
@@ -11,8 +11,8 @@ if (extension_loaded('xhprof') && !empty($_SERVER['XHPROF_ENABLE'])) {
             'meta' => array(
                 'url' => $_SERVER['REQUEST_URI'],
                 'get' => $_GET,
-                'SERVER' => empty($_SERVER['XHPROF_SERVER_ENABLE']) ? [] : $_SERVER,
-                'env' => empty($_SERVER['XHPROF_ENV_ENABLE']) ? [] : $_ENV,
+                'SERVER' => $_SERVER,
+               // 'env' => $_ENV,
                 'simple_url' => parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH),
                 'request_ts' => new MongoDB\BSON\UTCDateTime(microtime(true) * 1000),
                 'request_date' => date('Y-m-d'),
