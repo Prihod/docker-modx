@@ -1,5 +1,5 @@
 services:
-  web:
+  php:
     build:
       args:
         BLACKFIRE_ENABLE: ${BLACKFIRE_ENABLE}

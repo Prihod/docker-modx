@@ -13,7 +13,7 @@ services:
     env_file:
       - .env
     depends_on:
-      - web
+      - php
 
   mariadb:
     image: mariadb:latest

@@ -1,5 +1,5 @@
 services:
-  web:
+  php:
     build:
       args:
         XHPROF_ENABLE: ${XHPROF_ENABLE}
