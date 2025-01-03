@@ -319,7 +319,6 @@ docker-compose build --no-cache php
 | `docker restart <container_id>`                         | Перезапускает контейнер.                                                                          |
 | `docker logs <container_id>`                            | Показывает логи контейнера.                                                                       |
 | `docker exec -it <container_id> bash`                   | Открывает терминал внутри контейнера.                                                             |
-| **Очистка**                                             |                                                                                                   |
 | `docker system prune`                                   | Удаляет неиспользуемые данные (контейнеры, образы, тома, сети).                                   |
 | **Docker Compose**                                      |                                                                                                   |
 | `docker-compose up`                                     | Запускает все сервисы, указанные в `docker-compose.yml`.                                          |
