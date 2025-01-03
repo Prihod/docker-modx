@@ -162,7 +162,7 @@ docker-compose logs -f php
 - Xhprof (optional)
 - Blackfire (optional)
 
-## 🖥️ ️Basic Commands
+## 🖥️ Use Docker commands
 
 ### Reinstall MODX
 ```bash
@@ -313,3 +313,29 @@ When changing configuration, rebuild the container:
 ```bash
 docker-compose build --no-cache php
 ```
+
+## Main Docker and Docker Compose Commands
+| **Command**                                             | **Description**                                                                          |
+|---------------------------------------------------------|------------------------------------------------------------------------------------------|
+| **Docker**                                              |                                                                                          |
+| `docker ps`                                             | Shows running containers.                                                                |
+| `docker restart <container_id>`                         | Restarts a container.                                                                    |
+| `docker logs <container_id>`                            | Shows container logs.                                                                    |
+| `docker exec -it <container_id> bash`                   | Opens terminal inside container.                                                         |
+| **Cleanup**                                             |                                                                                          |
+| `docker system prune`                                   | Removes unused data (containers, images, volumes, networks).                             |
+| **Docker Compose**                                      |                                                                                          |
+| `docker-compose up`                                     | Starts all services specified in `docker-compose.yml`.                                   |
+| `docker-compose up -d`                                  | Starts services in background mode.                                                      |
+| `docker-compose down`                                   | Stops and removes services, networks, volumes created by `up`.                           |
+| `docker-compose restart`                                | Restarts all services.                                                                   |
+| `docker-compose ps`                                     | Shows list of running services.                                                          |
+| `docker-compose logs`                                   | Shows logs of all services.                                                              |
+| `docker-compose logs --tail <number>`                   | Shows last `<number>` lines of logs for all services.                                    |
+| `docker-compose logs -f <service_name>`                 | Shows and follows log stream for specified service.                                      |
+| `docker-compose logs -f --tail <number> <service_name>` | Shows and follows log stream for specified service, starting from last `<number>` lines. |
+| `docker-compose exec <service_name> bash`               | Opens terminal inside specified service.                                                 |
+| `docker-compose build`                                  | Builds images for services from `docker-compose.yml`.                                    |
+| `docker-compose build --no-cache`                       | Builds images without using cache.                                                       |
+| `docker-compose build --no-cache <service_name>`        | Builds image for specified service without using cache.                                  |
+| `docker-compose top`                                    | Shows processes running in services.                                                     |

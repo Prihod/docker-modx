@@ -65,4 +65,9 @@ return [
 
     // The number of items to show per page, on XHGui list pages.
     'page.limit' => 25,
+
+    'template_dir' => [
+        '/var/www/html/templates/custom',
+        '/var/www/html/templates',
+    ],
 ];

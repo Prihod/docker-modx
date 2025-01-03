@@ -29,3 +29,5 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
 COPY config.php /var/www/html/config/config.default.php
+
+COPY templates/runs/view.twig /var/www/html/templates/custom/runs/view.twig

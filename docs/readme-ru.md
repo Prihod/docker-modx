@@ -161,7 +161,7 @@ docker-compose logs -f php
 - Xhprof (опционально)
 - Blackfire (опционально)
 
-## 🖥️ ️Основные команды
+## 🖥️ Используйте команды Docker
 
 ### Переустановка MODX
 ```bash
@@ -311,3 +311,28 @@ BLACKFIRE_SERVER_TOKEN=<server_token>
 ```bash
 docker-compose build --no-cache php
 ```
+## Основные команды Docker и Docker Compose
+| **Команда**                                             | **Описание**                                                                                      |
+|---------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| **Docker**                                              |                                                                                                   |
+| `docker ps`                                             | Показывает запущенные контейнеры.                                                                 |
+| `docker restart <container_id>`                         | Перезапускает контейнер.                                                                          |
+| `docker logs <container_id>`                            | Показывает логи контейнера.                                                                       |
+| `docker exec -it <container_id> bash`                   | Открывает терминал внутри контейнера.                                                             |
+| **Очистка**                                             |                                                                                                   |
+| `docker system prune`                                   | Удаляет неиспользуемые данные (контейнеры, образы, тома, сети).                                   |
+| **Docker Compose**                                      |                                                                                                   |
+| `docker-compose up`                                     | Запускает все сервисы, указанные в `docker-compose.yml`.                                          |
+| `docker-compose up -d`                                  | Запускает сервисы в фоновом режиме.                                                               |
+| `docker-compose down`                                   | Останавливает и удаляет сервисы, сети, тома, созданные `up`.                                      |
+| `docker-compose restart`                                | Перезапускает все сервисы.                                                                        |
+| `docker-compose ps`                                     | Показывает список работающих сервисов.                                                            |
+| `docker-compose logs`                                   | Показывает логи всех сервисов.                                                                    |
+| `docker-compose logs --tail <number>`                   | Показывает последние `<number>` строк логов всех сервисов.                                        |
+| `docker-compose logs -f <service_name>`                 | Показывает и продолжает поток логов для указанного сервиса.                                       |
+| `docker-compose logs -f --tail <number> <service_name>` | Показывает и продолжает поток логов для указанного сервиса, начиная с последних `<number>` строк. |
+| `docker-compose exec <service_name> bash`               | Открывает терминал внутри указанного сервиса.                                                     |
+| `docker-compose build`                                  | Собирает образы для сервисов из `docker-compose.yml`.                                             |
+| `docker-compose build --no-cache`                       | Собирает образы без использования кэша.                                                           |
+| `docker-compose build --no-cache <service_name>`        | Собирает образ для указанного сервиса без использования кэша.                                     |
+| `docker-compose top`                                    | Показывает процессы, запущенные сервисами.                                                        |
