@@ -12,7 +12,8 @@ fi
 
 
 echo "Unzip Modx..."
-unzip -q "$source_file" -d "${ROOT_PATH}"
+# -o keeps startup non-interactive when modx-${MODX_VERSION} already exists.
+unzip -oq "$source_file" -d "${ROOT_PATH}"
 
 echo "Moving extracted Modx files..."
 cp -rf "${ROOT_PATH}"/modx-"${MODX_VERSION}"/* "${ROOT_PATH}"

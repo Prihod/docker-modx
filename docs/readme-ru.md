@@ -19,6 +19,10 @@ docker-compose up -d
 docker-compose logs -f php
 ```
 
+Первый запуск может занять несколько минут, пока MODX распаковывается и устанавливается.
+В это время сайт может временно возвращать `502 Bad Gateway`.
+Дождитесь появления в логах `php` строк `Modx installation is complete!` и `ready to handle connections`.
+
 ### Список URL
 
 | URL                      | Описание                                      |
@@ -314,6 +318,27 @@ BLACKFIRE_SERVER_TOKEN=<server_token>
 ```bash
 docker-compose build --no-cache php
 ```
+### Устранение неполадок: `Ошибка 503 - Could not load MODX config file`
+
+Эта ошибка означает, что установка MODX не завершилась и файл `core/config/config.inc.php` не был создан.
+
+1. Пересоберите контейнер `php` (обязательно после обновления стартовых скриптов):
+    ```bash
+    docker-compose build --no-cache php
+    ```
+2. Запустите контейнеры и следите за логами установки:
+    ```bash
+    docker-compose up -d
+    docker-compose logs -f php
+    ```
+3. Дождитесь появления этих строк в логах:
+    - `Modx installation is complete!`
+    - `ready to handle connections`
+4. При необходимости выполните принудительную переустановку:
+    ```bash
+    MODX_RESET=1 docker-compose up -d
+    ```
+
 ## Основные команды Docker и Docker Compose
 | **Команда**                                             | **Описание**                                                                                      |
 |---------------------------------------------------------|---------------------------------------------------------------------------------------------------|

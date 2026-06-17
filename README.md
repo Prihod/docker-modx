@@ -21,6 +21,10 @@ View MODX installation log
 docker-compose logs -f php
 ```
 
+The first start can take a few minutes while MODX is unpacked and installed.
+During this time, the site can temporarily return `502 Bad Gateway`.
+Wait until the `php` logs show `Modx installation is complete!` and `ready to handle connections`.
+
 ### URL list
 
 | URL                      | Description                                   |
@@ -316,6 +320,27 @@ When changing configuration, rebuild the container:
 ```bash
 docker-compose build --no-cache php
 ```
+
+### Troubleshooting: `Error 503 - Could not load MODX config file`
+
+This error means MODX installation did not finish, so `core/config/config.inc.php` was not created.
+
+1. Rebuild the `php` container (required after updating startup scripts):
+    ```bash
+    docker-compose build --no-cache php
+    ```
+2. Start containers and watch installation logs:
+    ```bash
+    docker-compose up -d
+    docker-compose logs -f php
+    ```
+3. Wait for these lines in logs:
+    - `Modx installation is complete!`
+    - `ready to handle connections`
+4. If needed, force a clean reinstall:
+    ```bash
+    MODX_RESET=1 docker-compose up -d
+    ```
 
 ## Main Docker and Docker Compose Commands
 | **Command**                                             | **Description**                                                                          |

@@ -131,9 +131,15 @@ RUN if [ "$BLACKFIRE_ENABLE" -eq 1 ]; then \
     fi
 
 RUN if [ "$SSH_ENABLE" -eq 1 ]; then \
-       mkdir /var/run/sshd \
+        mkdir -p /var/run/sshd \
         && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
-        && useradd -rm -d ${ROOT_PATH} -s /bin/bash -g root -G www-data -u 1000 ${SSH_LOGIN} \
+        && if ! id -u ${SSH_LOGIN} >/dev/null 2>&1; then \
+               if getent passwd 1000 >/dev/null 2>&1; then \
+                   useradd -rm -d ${ROOT_PATH} -s /bin/bash -g root -G www-data ${SSH_LOGIN}; \
+               else \
+                   useradd -rm -d ${ROOT_PATH} -s /bin/bash -g root -G www-data -u 1000 ${SSH_LOGIN}; \
+               fi; \
+           fi \
         && echo "${SSH_LOGIN}:${SSH_PASSWORD}" | chpasswd; \
     fi
 

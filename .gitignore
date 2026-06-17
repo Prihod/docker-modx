@@ -4,3 +4,23 @@
 *.crt
 *.csr
 *.logxw
+
+# Docker runtime logs
+/docker/logs/nginx/*
+/docker/logs/php/*
+!/docker/logs/nginx/.gitkeep
+!/docker/logs/php/.gitkeep
+
+# MariaDB runtime volume data
+/docker/volume/mariadb/*
+!/docker/volume/mariadb/.gitkeep
+
+# MODX export/import runtime artifacts
+/docker/modx/storage/cache/*
+/docker/modx/storage/backup/*
+!/docker/modx/storage/cache/.gitkeep
+!/docker/modx/storage/backup/.gitkeep
+
+# Generated webroot after installer runs
+/www/*
+!/www/.gitkeep
