@@ -87,7 +87,7 @@ Wait until the `php` logs show `Modx installation is complete!` and `ready to ha
 |   |           |   |-- Tasks
 |   |           |   |   |-- GrantAccessUserTask.php
 |   |           |   |   |-- InstallPackagesTask.php
-|   |           |   |   |-- MiniShop2Task.php
+|   |           |   |   |-- MiniShop3Task.php
 |   |           |   |   |-- SetOptionsTask.php
 |   |           |   |   |-- Task.php
 |   |           |   |   |-- TaskInterface.php
@@ -103,20 +103,19 @@ Wait until the `php` logs show `Modx installation is complete!` and `ready to ha
 |   |           |   `-- Utils
 |   |           |       `-- Logger.php
 |   |           `-- storage
-|   |               `-- ms2
-|   |                   |-- demo
-|   |                   |   |-- categories.csv
-|   |                   |   |-- products
-|   |                   |   |-- products.csv
-|   |                   |   |-- vendors
-|   |                   |   `-- vendors.csv
+|   |               `-- ms3
 |   |                   |-- pages
 |   |                   |   |-- cart.tpl
-|   |                   |   `-- category.tpl
+|   |                   |   |-- category.tpl
+|   |                   |   |-- order.tpl
+|   |                   |   `-- thanks.tpl
 |   |                   `-- templates
+|   |                       |-- base.tpl
 |   |                       |-- cart.tpl
-|   |                       |-- category.tpl
-|   |                       `-- product.tpl
+|   |                       |-- catalog.tpl
+|   |                       |-- order.tpl
+|   |                       |-- product.tpl
+|   |                       `-- thanks.tpl
 |   |-- nginx
 |   |   |-- default.conf.template
 |   |   `-- ssl
@@ -254,7 +253,7 @@ docker-compose exec php bash && php /var/www/html/core/configurator/run.php
 | InstallPackagesTask    | install_packages                   | Installing packages                                    |
 | SetOptionsTask         | set_options                        | Configuring system parameters                          |
 | GrantAccessUserTask    | grant_access_user                  | Setting up access rights                               |
-| MiniShop2Task          | ms2                                | Setting up miniShop2 store (optionally with demo data) |
+| MiniShop3Task          | ms3                                | Setting up miniShop3 store (optionally with demo data) |
 
 ### Creating Custom Tasks
 

@@ -85,7 +85,7 @@ docker-compose logs -f php
 |   |           |   |-- Tasks
 |   |           |   |   |-- GrantAccessUserTask.php
 |   |           |   |   |-- InstallPackagesTask.php
-|   |           |   |   |-- MiniShop2Task.php
+|   |           |   |   |-- MiniShop3Task.php
 |   |           |   |   |-- SetOptionsTask.php
 |   |           |   |   |-- Task.php
 |   |           |   |   |-- TaskInterface.php
@@ -101,20 +101,19 @@ docker-compose logs -f php
 |   |           |   `-- Utils
 |   |           |       `-- Logger.php
 |   |           `-- storage
-|   |               `-- ms2
-|   |                   |-- demo
-|   |                   |   |-- categories.csv
-|   |                   |   |-- products
-|   |                   |   |-- products.csv
-|   |                   |   |-- vendors
-|   |                   |   `-- vendors.csv
+|   |               `-- ms3
 |   |                   |-- pages
 |   |                   |   |-- cart.tpl
-|   |                   |   `-- category.tpl
+|   |                   |   |-- category.tpl
+|   |                   |   |-- order.tpl
+|   |                   |   `-- thanks.tpl
 |   |                   `-- templates
+|   |                       |-- base.tpl
 |   |                       |-- cart.tpl
-|   |                       |-- category.tpl
-|   |                       `-- product.tpl
+|   |                       |-- catalog.tpl
+|   |                       |-- order.tpl
+|   |                       |-- product.tpl
+|   |                       `-- thanks.tpl
 |   |-- nginx
 |   |   |-- default.conf.template
 |   |   `-- ssl
@@ -253,7 +252,7 @@ docker-compose exec php bash && php /var/www/html/core/configurator/run.php
 | InstallPackagesTask    | install_packages                | Установка пакетов                                            |
 | SetOptionsTask         | set_options                     | Настройка системных параметров                               |
 | GrantAccessUserTask    | grant_access_user               | Настройка прав доступа                                       |
-| MiniShop2Task          | ms2                             | Настройка магазина на miniShop2 (опционально с демо-данными) |
+| MiniShop3Task          | ms3                             | Настройка магазина на miniShop3 (опционально с демо-данными) |
 
 ### Создание собственных задач
 
