@@ -9,6 +9,7 @@ use modX;
 use MODX\Revolution\Processors\Workspace\Providers\Create as CreateProvider;
 use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Transport\modTransportProvider;
+use Psr\Http\Message\ResponseInterface;
 
 trait TransportProviderTrait
 {
@@ -41,13 +42,14 @@ trait TransportProviderTrait
 
         $this->modx->getVersionData();
         $productVersion = $this->modx->version['code_name'] . '-' . $this->modx->version['full_version'];
+        /** @var ResponseInterface|bool $response */
         $response = $provider->request('package', 'GET', [
             'supports' => $productVersion,
             'query' => $name,
         ]);
 
         if (!empty($response)) {
-            $foundPackages = simplexml_load_string((string) $response->response);
+            $foundPackages = simplexml_load_string($response->getBody()->getContents());
             foreach ($foundPackages as $foundPackage) {
                 /** @var modTransportPackage $foundPackage */
                 /** @noinspection PhpUndefinedFieldInspection */
@@ -92,6 +94,8 @@ trait TransportProviderTrait
                         return true;
                     }
                     Logger::error("Could not install package '{$name}'!");
+
+                    return false;
                 }
             }
             Logger::error("Could not find package '{$name}' in '{$providerName}' repository!");

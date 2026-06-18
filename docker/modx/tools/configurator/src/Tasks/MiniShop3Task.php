@@ -70,6 +70,13 @@ class MiniShop3Task extends Task
 
     protected function importDemo(): void
     {
+        if (!$this->getPackage('VueTools')) {
+            Logger::info('Start Install Package VueTools');
+            if (!$this->installVueTools()) {
+                Logger::ERROR('Error in install package VueTools');
+            }
+        }
+
         if (!$this->getPackage('ms3DemoData')) {
             Logger::info('Start Install Package ms3DemoData');
             if (!$this->installMs3DemoData()) {
@@ -89,6 +96,7 @@ class MiniShop3Task extends Task
         }
 
         $params = [
+            'use_scheduler' => false,
             'generate_customers' => $config['customers'] ?? false,
             'generate_orders' => $config['orders'] ?? false,
             'package' => $config['data_size'] ?? 'S',
@@ -239,6 +247,13 @@ class MiniShop3Task extends Task
     protected function installMs3DemoData(): bool
     {
         return $this->installPackage('ms3DemoData', [
+            'provider' => 'modstore.pro',
+        ]);
+    }
+
+    protected function installVueTools(): bool
+    {
+        return $this->installPackage('VueTools', [
             'provider' => 'modstore.pro',
         ]);
     }

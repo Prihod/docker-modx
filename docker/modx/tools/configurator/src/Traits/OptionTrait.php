@@ -58,11 +58,9 @@ trait OptionTrait
     {
         return str_replace([
             '{base_url}',
-            '{core_url}',
             '{assets_url}',
         ], [
             MODX_BASE_URL,
-            MODX_CORE_URL,
             MODX_ASSETS_URL,
         ], $url);
     }
