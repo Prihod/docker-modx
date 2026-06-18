@@ -6,7 +6,7 @@ $config['tasks'] = [
     'InstallPackagesTask',
     'SetOptionsTask',
     //'GrantAccessUserTask',
-    //'MiniShop2Task',
+    //'MiniShop3Task',
 ];
 
 $config['transport_providers'] = [
@@ -28,6 +28,9 @@ $config['install_packages'] = [
     ],
     'console' => [
         'name' => 'Console',
+    ],
+    'pdotools' => [
+        'name' => 'pdoTools',
     ],
 ];
 
@@ -181,24 +184,28 @@ $config['grant_access_user'] = [
 
 ];
 
-$config['ms2'] = [
+$config['ms3'] = [
     'demo' => [
         'reset' => false,
         'enable' => false,
-        'vendors' => true,
-        'products' => true,
-        'categories' => true,
+        'orders' => true,
+        'customers' => true,
+        'data_size' => 'S', // S|M|L
     ],
     'templates' => [
-        'cart',
+        'base',
+        'catalog',
         'product',
-        'category',
+        'cart',
+        'order',
+        'thanks',
+
     ],
     'pages' => [
         'category' => [
             'pagetitle' => 'Category',
-            'template' => 'category',
-            'class_key' => 'msCategory',
+            'template' => 'catalog',
+            'class_key' => 'MiniShop3\Model\msCategory',
             'content' => '',
             'hidemenu' => 0,
             'publishedon' => 1,
@@ -207,6 +214,18 @@ $config['ms2'] = [
             'pagetitle' => 'Cart',
             'template' => 'cart',
             'hidemenu' => 0,
+            'publishedon' => 1,
+        ],
+        'order' => [
+            'pagetitle' => 'Order',
+            'template' => 'order',
+            'hidemenu' => 1,
+            'publishedon' => 1,
+        ],
+        'thanks' => [
+            'pagetitle' => 'Thanks',
+            'template' => 'thanks',
+            'hidemenu' => 1,
             'publishedon' => 1,
         ],
     ],

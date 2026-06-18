@@ -7,7 +7,6 @@ use App\Utils\Logger;
 
 class TransportProvidersTask extends Task
 {
-
     use TransportProviderTrait;
 
     public function getName(): string
@@ -19,11 +18,13 @@ class TransportProvidersTask extends Task
     {
         $providers = $this->getProperty('transport_providers', []);
         foreach ($providers as $provider) {
-            if (
-                empty($provider['username']) ||
-                empty($provider['api_key']) ||
-                $this->hasProvider($provider['name'])
-            ) {
+            if (empty($provider['username'])) {
+                continue;
+            }
+            if (empty($provider['api_key'])) {
+                continue;
+            }
+            if ($this->hasProvider($provider['name'])) {
                 continue;
             }
             if ($this->addProvider($provider)) {
@@ -31,5 +32,4 @@ class TransportProvidersTask extends Task
             }
         }
     }
-
 }

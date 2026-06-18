@@ -34,17 +34,20 @@ class GrantAccessUserTask extends Task
             $templateName = empty($data['access_policy_template_name']) ? $groupName : $data['access_policy_template_name'];
             $mediaSourceOptions = $data['media_source'] ?? null;
             $sourceTemplate = $this->detectSourceAccessPolicyTemplate($data);
-
-            if (!$contextKey || !$groupName || !$sourceTemplate) {
+            if (!$contextKey) {
                 continue;
             }
-
+            if (!$groupName) {
+                continue;
+            }
+            if (!$sourceTemplate) {
+                continue;
+            }
 
             $template = $this->getOrDuplicateAccessPolicyTemplate($templateName, $sourceTemplate->get('id'));
             if (!$template) {
                 continue;
             }
-
 
             $permissions = $this->prepareTemplatePermissions($permissions, $sourceTemplate->get('id'), $data);
             $accessPolicy = $this->getOrCreateAccessPolicy($policyName, $template->get('id'), $permissions);
@@ -81,10 +84,10 @@ class GrantAccessUserTask extends Task
                 ]);
             }
 
-            $groupMember = array(
+            $groupMember = [
                 'user_group' => $userGroup->get('id'),
                 'role' => $role->get('id'),
-            );
+            ];
 
             foreach ($users as $user) {
                 $this->getOrCreateUser($user, $groupMember);
@@ -108,6 +111,7 @@ class GrantAccessUserTask extends Task
         } else {
             $defaultPermissions = $this->getAccessPolicyPermissions($templateId);
         }
+
         return array_merge($defaultPermissions, $permissions);
     }
 
@@ -115,10 +119,12 @@ class GrantAccessUserTask extends Task
     {
         if (!empty($options['access_policy_template_override'])) {
             return $this->findAccessPolicyTemplate($options['access_policy_template_override']);
-
-        } else if (!empty($options['access_policy_template_inherit'])) {
-            return $this->findAccessPolicyTemplate($options['access_policy_template_inherit']);
         }
+        if (!empty($options['access_policy_template_inherit'])) {
+            return $this->findAccessPolicyTemplate($options['access_policy_template_inherit']);
+
+        }
+
         return null;
     }
 
@@ -167,14 +173,14 @@ class GrantAccessUserTask extends Task
 
             $this->getOrCreateAccessMediaSource($access);
 
-            $adminAccess = array(
+            $adminAccess = [
                 'target' => 1,
                 'principal_class' => 'modUserGroup',
                 'principal' => 1,
                 'authority' => 0,
                 'policy' => 8,
                 'context_key' => '',
-            );
+            ];
             $this->getOrCreateAccessMediaSource($adminAccess);
 
             if ($isBindTvs) {

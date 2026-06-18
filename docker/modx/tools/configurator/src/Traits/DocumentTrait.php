@@ -3,13 +3,16 @@
 namespace App\Traits;
 
 use App\Utils\Logger;
+use modProcessorResponse;
+use modX;
+use MODX\Revolution\modResource;
+use MODX\Revolution\Processors\Resource\Create;
 
 trait DocumentTrait
 {
-    protected \modX $modx;
+    protected modX $modx;
 
-
-    protected function createModDocument(array $params = []): ?object
+    protected function createModDocument(array $params = []): ?modResource
     {
         $name = $params['pagetitle'] ?? null;
         if (empty($name)) {
@@ -17,25 +20,27 @@ trait DocumentTrait
         }
         if (!$doc = $this->findModDocument($name)) {
             $this->modx->error->reset();
-            /** @var \modProcessorResponse $response */
-            $response = $this->modx->runProcessor('resource/create', $params);
+            /** @var modProcessorResponse $response */
+            $response = $this->modx->runProcessor(Create::class, $params);
             if ($response->isError()) {
                 Logger::error($response->getResponse());
+
                 return null;
             }
             $obj = $response->getObject();
             $doc = $this->getModDocument($obj['id']);
         }
+
         return $doc;
     }
 
-    protected function findModDocument(string $name): ?object
+    protected function findModDocument(string $name): ?modResource
     {
-        return $this->modx->getObject('modResource', ['pagetitle' => $name]);
+        return $this->modx->getObject(modResource::class, ['pagetitle' => $name]);
     }
 
-    protected function getModDocument(int $id): ?object
+    protected function getModDocument(int $id): ?modResource
     {
-        return $this->modx->getObject('modResource', $id);
+        return $this->modx->getObject(modResource::class, $id);
     }
 }

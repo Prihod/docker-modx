@@ -6,6 +6,8 @@ use App\Tasks\Task;
 use App\Traits\InitializeTrait;
 use App\Traits\PropertiesTrait;
 use App\Utils\Logger;
+use Exception;
+use modX;
 
 class Runner implements RunnerInterface
 {
@@ -14,7 +16,7 @@ class Runner implements RunnerInterface
 
     protected array $tasks = [];
 
-    public function __construct(\modX $modx, array $properties = [])
+    public function __construct(modX $modx, array $properties = [])
     {
         $this->initialize($modx, $properties);
     }
@@ -22,15 +24,15 @@ class Runner implements RunnerInterface
     public function run(): void
     {
         $this->loadTasks();
-        if (empty($this->tasks)) {
+        if ($this->tasks === []) {
             return;
         }
-        Logger::info("Start configurator Modx");
+        Logger::info('Start configurator Modx');
         foreach ($this->tasks as $task) {
             $this->runTask($task);
             $this->modx->reloadConfig();
         }
-        Logger::info("Finish configurator Modx");
+        Logger::info('Finish configurator Modx');
     }
 
     protected function loadTasks(): array
@@ -50,16 +52,18 @@ class Runner implements RunnerInterface
             $fullClass = 'App\\Tasks\\' . $handler;
             if (!class_exists($fullClass)) {
                 Logger::error("Class '{$fullClass}' not found.");
+
                 return;
             }
             $task = new $fullClass($this->modx, $this->getProperties());
             if (!$task instanceof Task) {
                 Logger::error("Task handler error: The handler '{$handler}' must be an instance of Task.");
+
                 return;
             }
 
             $this->tasks[] = $task;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Logger::error($e->getMessage());
         }
     }
@@ -70,7 +74,7 @@ class Runner implements RunnerInterface
             Logger::info("Start execute task: '{$task->getName()}'");
             $task->execute();
             Logger::info("Finish execute task: '{$task->getName()}'");
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Logger::error("Error in task '{$task->getName()}': " . $e->getMessage());
         }
     }

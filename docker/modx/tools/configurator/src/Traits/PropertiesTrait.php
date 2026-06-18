@@ -14,6 +14,7 @@ trait PropertiesTrait
     public function getProperty(string $key, $default = null, bool $skipEmpty = false)
     {
         $value = $this->properties[$key] ?? $default;
+
         return ($skipEmpty && empty($value)) ? $default : $value;
     }
 
@@ -40,6 +41,7 @@ trait PropertiesTrait
     public function setDefaultProperties(array $properties = []): array
     {
         $this->properties = array_merge($properties, $this->properties);
+
         return $this->properties;
     }
 }

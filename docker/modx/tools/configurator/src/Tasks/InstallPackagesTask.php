@@ -2,18 +2,13 @@
 
 namespace App\Tasks;
 
-use App\Traits\OptionTrait;
 use App\Traits\TransportProviderTrait;
 use App\Utils\Logger;
+use MODX\Revolution\Transport\modTransportPackage;
 
 class InstallPackagesTask extends Task
 {
     use TransportProviderTrait;
-
-    public function __construct(\modX $modx, array $properties = [])
-    {
-        parent::__construct($modx, $properties);
-    }
 
     public function getName(): string
     {
@@ -30,7 +25,7 @@ class InstallPackagesTask extends Task
         foreach ($packages as $data) {
             $name = $data['name'] ?? '';
             $version = $data['version'] ?? '';
-            /** @var \modTransportPackage $package */
+            /** @var modTransportPackage $package */
             $package = $this->getPackage($name);
             if ($package && $package->compareVersion($version, '<=')) {
                 continue;

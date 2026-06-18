@@ -4,15 +4,15 @@ namespace App\Tasks;
 
 use App\Traits\InitializeTrait;
 use App\Traits\PropertiesTrait;
-use App\Utils\Logger;
+use Exception;
+use modX;
 
 abstract class Task implements TaskInterface
 {
-
     use PropertiesTrait;
     use InitializeTrait;
 
-    public function __construct(\modX $modx, array $properties = [])
+    public function __construct(modX $modx, array $properties = [])
     {
         $this->initialize($modx, $properties);
     }
@@ -28,22 +28,23 @@ abstract class Task implements TaskInterface
         if (!file_exists($path)) {
             $this->modx->cacheManager->writeTree($path);
         }
+
         return $path;
     }
 
-    protected function readCsv(string $file, callable $callback, string $delimiter = ";"): void
+    protected function readCsv(string $file, callable $callback, string $delimiter = ';'): void
     {
         if (!file_exists($file) || !is_readable($file)) {
-            throw new \Exception("File not found or not readable: $file");
+            throw new Exception("File not found or not readable: $file");
         }
 
         if (($handle = fopen($file, 'r')) !== false) {
-            while (($row = fgetcsv($handle, 0, ";", '"')) !== false) {
+            while (($row = fgetcsv($handle, 0, ';', '"', escape: '\\')) !== false) {
                 $callback($row);
             }
             fclose($handle);
         } else {
-            throw new \Exception("Failed to open file: $file");
+            throw new Exception("Failed to open file: $file");
         }
     }
 
@@ -51,12 +52,13 @@ abstract class Task implements TaskInterface
     {
         if (($handle = fopen($file, 'w')) !== false) {
             foreach ($data as $row) {
-                fputcsv($handle, $row, ";");
+                fputcsv($handle, $row, ';', escape: '\\');
             }
             fclose($handle);
+
             return;
         }
-        throw new \Exception("Failed to open file: $file");
-    }
 
+        throw new Exception("Failed to open file: $file");
+    }
 }

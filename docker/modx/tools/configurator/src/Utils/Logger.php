@@ -4,14 +4,12 @@ namespace App\Utils;
 
 class Logger
 {
-    const LEVEL_DEBUG = 'debug';
-    const LEVEL_INFO = 'info';
-    const LEVEL_WARNING = 'warning';
-    const LEVEL_ERROR = 'error';
+    public const LEVEL_DEBUG = 'debug';
+    public const LEVEL_INFO = 'info';
+    public const LEVEL_WARNING = 'warning';
+    public const LEVEL_ERROR = 'error';
 
     /**
-     * @param mixed $message
-     * @return void
      */
     public static function debug($message): void
     {
@@ -19,8 +17,6 @@ class Logger
     }
 
     /**
-     * @param mixed $message
-     * @return void
      */
     public static function info($message): void
     {
@@ -28,8 +24,6 @@ class Logger
     }
 
     /**
-     * @param mixed $message
-     * @return void
      */
     public static function warning($message): void
     {
@@ -37,8 +31,6 @@ class Logger
     }
 
     /**
-     * @param mixed $message
-     * @return void
      */
     public static function error($message): void
     {
@@ -46,9 +38,6 @@ class Logger
     }
 
     /**
-     * @param mixed $message
-     * @param string $level
-     * @return void
      */
     public static function log($message, string $level): void
     {
@@ -60,7 +49,9 @@ class Logger
         } else {
             echo $formattedMessage;
         }
-        ob_flush();
+        if (ob_get_level() > 0) {
+            ob_flush();
+        }
         flush();
     }
 }

@@ -2,14 +2,16 @@
 
 namespace App\Traits;
 
+use modX;
+
 trait InitializeTrait
 {
-    protected \modX $modx;
+    protected modX $modx;
 
-    public function initialize(\modX $modx, array $properties = []): void
+    public function initialize(modX $modx, array $properties = []): void
     {
         $this->modx = $modx;
-        if ($this->hasTrait('App\Traits\PropertiesTrait')) {
+        if ($this->hasTrait(\App\Traits\PropertiesTrait::class)) {
             $this->setProperties($properties);
         }
     }
@@ -25,5 +27,4 @@ trait InitializeTrait
 
         return false;
     }
-
 }

@@ -6,7 +6,7 @@ $config['tasks'] = [
     'InstallPackagesTask',
     'SetOptionsTask',
     'GrantAccessUserTask',
-    'MiniShop2Task',
+    'MiniShop3Task',
 ];
 
 $config['transport_providers'] = [
@@ -35,17 +35,14 @@ $config['install_packages'] = [
     'console' => [
         'name' => 'Console',
     ],
-    'VersionX' => [
+    'pdotools' => [
+        'name' => 'pdoTools',
+    ],
+    'versionx' => [
         'name' => 'versionx',
     ],
     'clientconfig' => [
         'name' => 'ClientConfig',
-    ],
-    'debugparser' => [
-        'name' => 'debugParser',
-    ],
-    'tagelementplugin' => [
-        'name' => 'tagElementPlugin',
     ],
     'upgrademodx' => [
         'name' => 'UpgradeMODX',
@@ -59,28 +56,8 @@ $config['install_packages'] = [
     'tinymcerte' => [
         'name' => 'TinyMCE Rich Text Editor',
     ],
-    'admintools' => [
-        'name' => 'AdminTools',
-        'provider' => 'modstore.pro',
-    ],
-    'moddevtools' => [
-        'name' => 'modDevTools',
-        'provider' => 'modstore.pro',
-    ],
-    'frontendmanager' => [
-        'name' => 'frontendManager',
-        'provider' => 'modstore.pro',
-    ],
-    'staticelementslive' => [
-        'name' => 'StaticElementsLive',
-        'provider' => 'modstore.pro',
-    ],
-    'theme.bootstrap' => [
-        'name' => 'Theme.Bootstrap',
-        'provider' => 'modstore.pro',
-    ],
-    'minishop2' => [
-        'name' => 'miniShop2',
+    'minishop3' => [
+        'name' => 'MiniShop3',
         'provider' => 'modstore.pro',
     ],
 ];
@@ -236,24 +213,28 @@ $config['grant_access_user'] = [
 
 ];
 
-$config['ms2'] = [
+$config['ms3'] = [
     'demo' => [
         'reset' => false,
-        'enable' => true,
-        'vendors' => true,
-        'products' => true,
-        'categories' => true,
+        'enable' => false,
+        'orders' => true,
+        'customers' => true,
+        'data_size' => 'S', // S|M|L
     ],
     'templates' => [
-        'cart',
+        'base',
+        'catalog',
         'product',
-        'category',
+        'cart',
+        'order',
+        'thanks',
+
     ],
     'pages' => [
         'category' => [
             'pagetitle' => 'Category',
-            'template' => 'category',
-            'class_key' => 'msCategory',
+            'template' => 'catalog',
+            'class_key' => 'MiniShop3\Model\msCategory',
             'content' => '',
             'hidemenu' => 0,
             'publishedon' => 1,
@@ -262,6 +243,18 @@ $config['ms2'] = [
             'pagetitle' => 'Cart',
             'template' => 'cart',
             'hidemenu' => 0,
+            'publishedon' => 1,
+        ],
+        'order' => [
+            'pagetitle' => 'Order',
+            'template' => 'order',
+            'hidemenu' => 1,
+            'publishedon' => 1,
+        ],
+        'thanks' => [
+            'pagetitle' => 'Thanks',
+            'template' => 'thanks',
+            'hidemenu' => 1,
             'publishedon' => 1,
         ],
     ],

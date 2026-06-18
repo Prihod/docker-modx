@@ -2,13 +2,16 @@
 
 namespace App\Traits;
 
+use modX;
+use MODX\Revolution\modSystemSetting;
+
 trait OptionTrait
 {
-    protected \modX $modx;
+    protected modX $modx;
 
     protected function setOption(string $key, string $value, $clearCache = false): bool
     {
-        if (!$setting = $this->modx->getObject('modSystemSetting', ['key' => $key])) {
+        if (!$setting = $this->modx->getObject(modSystemSetting::class, ['key' => $key])) {
             return false;
         }
 
@@ -17,7 +20,7 @@ trait OptionTrait
         if ($saved) {
             $this->modx->setOption($key, $value);
             if ($clearCache) {
-                $this->modx->cacheManager->refresh(array('system_settings' => array()));
+                $this->modx->cacheManager->refresh(['system_settings' => []]);
             }
         }
 
@@ -26,7 +29,7 @@ trait OptionTrait
 
     protected function getOption(string $key, $default = null)
     {
-        if (!$setting = $this->modx->getObject('modSystemSetting', ['key' => $key])) {
+        if (!$setting = $this->modx->getObject(modSystemSetting::class, ['key' => $key])) {
             return $default;
         }
         $value = $setting->get('value');
@@ -34,33 +37,33 @@ trait OptionTrait
             $value = $this->normalizePath($value);
             $value = $this->normalizeUrl($value);
         }
+
         return $value;
     }
 
     private function normalizePath(string $path): string
     {
-        return str_replace(array(
+        return str_replace([
             '{base_path}',
             '{core_path}',
             '{assets_path}',
-        ), array(
+        ], [
             MODX_BASE_PATH,
             MODX_CORE_PATH,
             MODX_ASSETS_PATH,
-        ), $path);
+        ], $path);
     }
 
     private function normalizeUrl(string $url): string
     {
-        return str_replace(array(
+        return str_replace([
             '{base_url}',
             '{core_url}',
             '{assets_url}',
-        ), array(
-            MODX_BASE_PATH,
-            MODX_CORE_PATH,
-            MODX_ASSETS_PATH,
-        ), $url);
+        ], [
+            MODX_BASE_URL,
+            MODX_CORE_URL,
+            MODX_ASSETS_URL,
+        ], $url);
     }
-
 }
