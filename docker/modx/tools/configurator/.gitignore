@@ -1,0 +1,4 @@
+# Dev tooling artifacts (rector / php-cs-fixer) — generated locally, never commit
+/vendor/
+/composer.lock
+/.php-cs-fixer.cache

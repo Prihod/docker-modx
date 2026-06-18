@@ -13,7 +13,7 @@ chmod -R 775 "$configurator_path"
 
 echo "Run composer update for Modx configurator..."
 cd "$configurator_path"
-composer update;
+composer update --no-dev --no-interaction;
 
 php "$configurator_path"/run.php
 
