@@ -8,7 +8,7 @@ Before starting, make sure you have [Docker](https://www.docker.com/get-started/
 
 Clone the repository into the project directory
 ```bash
-git clone "https://github.com/Prihod/docker-modx.git" ./
+git clone -b modx-2.x "https://github.com/Prihod/docker-modx.git" ./
 ```
 
 Start containers

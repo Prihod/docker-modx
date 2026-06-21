@@ -8,7 +8,7 @@
 
 Клонирование репозитория в директорию проекта
 ```bash
-git clone "https://github.com/Prihod/docker-modx.git" ./
+git clone -b modx-2.x "https://github.com/Prihod/docker-modx.git" ./
 ```
 Запуск контейнеров
 ```bash
