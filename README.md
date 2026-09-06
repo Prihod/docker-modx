@@ -205,7 +205,7 @@ All project settings are in the `.env` file. Below are the main parameters:
 | Name                         | Default Value | Description                                                                                                       |
 |------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------|
 | PHP_VERSION                  | 8.4           | PHP-FPM version                                                                                                   |
-| MODX_VERSION                 | 3.2.1-pl      | MODX version                                                                                                      |
+| MODX_VERSION                 | 3.2.4-pl      | MODX version                                                                                                      |
 | MODX_INSTALL_ENABLE          | 1             | Automatically install MODX                                                                                        |
 | MODX_USE_CACHE_SOURCE        | 1             | Save MODX setup archive                                                                                           |
 | MODX_CONFIGURE_ENABLE        | 0             | Run configuration script after MODX installation                                                                  |
