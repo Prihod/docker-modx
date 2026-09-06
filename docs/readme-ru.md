@@ -202,34 +202,34 @@ ssh dev@127.0.0.1 -p 2222  # Логин: dev, Пароль: dev
 
 Все настройки проекта находятся в файле `.env`. Ниже приведены основные параметры:
 
-| Название                     | Значение по умолчанию     | Описание                                                                                                                 |
-|------------------------------|---------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| PHP_VERSION                  | 7.4                       | Версия PHP-FPM                                                                                                           |
-| MODX_VERSION                 | 2.8.8-pl                  | Версия MODX                                                                                                              |
-| MODX_INSTALL_ENABLE          | 1                         | Автоматически устанавливать MODX                                                                                         |
-| MODX_USE_CACHE_SOURCE        | 1                         | Сохранять setup архив MODX                                                                                               |
-| MODX_CONFIGURE_ENABLE        | 0                         | По окончанию установки MODX запускать скрипт его конфигурации                                                            |
-| MODX_CONFIGURE_DEV_MODE      | 0                         | Dev режиме работы скрипта конфигурации MODX                                                                              |
-| MODX_TABLE_PREFIX            | random:8                  | Префикс таблиц базы данных. При значении `random:число` будет сгенерирована случайная строка с указанным числом символов |
-| MODX_HTTP_HOST               | localhost                 | Имя хоста сайта                                                                                                          |
-| MODX_LANGUAGE                | en                        | Язык, на котором будет установлен MODX                                                                                   |
-| MODX_CMS_ADMIN               | admin                     | Логин администратора MODX                                                                                                |
-| MODX_CMS_PASS                | admin                     | Пароль администратора MODX                                                                                               |
-| MODX_IMPORT_DB               | 1                         | Импортировать базу данных MODX                                                                                           |
-| MODX_IMPORT_SITE             | 1                         | Импортировать файлы MODX                                                                                                 |
-| MODX_EXPORT_DB               | 1                         | Экспортировать базу данных MODX                                                                                          |
-| MODX_EXPORT_SITE             | 1                         | Экспортировать файлы MODX                                                                                                |
-| MODX_EXPORT_OVERWRITE_CONFIG | 0                         | При экспорте перезаписывать данные в конфигурационных файлах MODX на значения из `MODX_EXPORT_...` переменных            | |
-| XDEBUG_ENABLE                | 0                         | Установить для PHP-FPM расширение Xdebug                                                                                 |
-| XHPROF_ENABLE                | 0                         | Установить для PHP-FPM расширение Xhprof                                                                                 |
-| SSH_ENABLE                   | 1                         | Разрешить SSH для контейнера `php`                                                                                       |
-| SSL_GENERATE                 | 1                         | Генерировать самоподписанный SSL сертификат                                                                              |
-| NGINX_PORT                   | 80                        | Порт для NGINX                                                                                                           |
-| MARIADB_PORT                 | 3306                      | Порт для MariaDB                                                                                                         |
-| PHPMYADMIN_PORT              | 8080                      | Порт для phpMyAdmin                                                                                                      |
-| MAILHOG_PORT                 | 8025                      | Порт для  MailHog                                                                                                        |
-| SMTP_PORT                    | 1025                      | SMTP порт                                                                                                                |
-| SMTP_HOST                    | mailhog                   | SMTP хост                                                                                                                |
+| Название                     | Значение по умолчанию | Описание                                                                                                                 |
+|------------------------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------|
+| PHP_VERSION                  | 7.4                   | Версия PHP-FPM                                                                                                           |
+| MODX_VERSION                 | 2.8.9-pl              | Версия MODX                                                                                                              |
+| MODX_INSTALL_ENABLE          | 1                     | Автоматически устанавливать MODX                                                                                         |
+| MODX_USE_CACHE_SOURCE        | 1                     | Сохранять setup архив MODX                                                                                               |
+| MODX_CONFIGURE_ENABLE        | 0                     | По окончанию установки MODX запускать скрипт его конфигурации                                                            |
+| MODX_CONFIGURE_DEV_MODE      | 0                     | Dev режиме работы скрипта конфигурации MODX                                                                              |
+| MODX_TABLE_PREFIX            | random:8              | Префикс таблиц базы данных. При значении `random:число` будет сгенерирована случайная строка с указанным числом символов |
+| MODX_HTTP_HOST               | localhost             | Имя хоста сайта                                                                                                          |
+| MODX_LANGUAGE                | en                    | Язык, на котором будет установлен MODX                                                                                   |
+| MODX_CMS_ADMIN               | admin                 | Логин администратора MODX                                                                                                |
+| MODX_CMS_PASS                | admin                 | Пароль администратора MODX                                                                                               |
+| MODX_IMPORT_DB               | 1                     | Импортировать базу данных MODX                                                                                           |
+| MODX_IMPORT_SITE             | 1                     | Импортировать файлы MODX                                                                                                 |
+| MODX_EXPORT_DB               | 1                     | Экспортировать базу данных MODX                                                                                          |
+| MODX_EXPORT_SITE             | 1                     | Экспортировать файлы MODX                                                                                                |
+| MODX_EXPORT_OVERWRITE_CONFIG | 0                     | При экспорте перезаписывать данные в конфигурационных файлах MODX на значения из `MODX_EXPORT_...` переменных            | |
+| XDEBUG_ENABLE                | 0                     | Установить для PHP-FPM расширение Xdebug                                                                                 |
+| XHPROF_ENABLE                | 0                     | Установить для PHP-FPM расширение Xhprof                                                                                 |
+| SSH_ENABLE                   | 1                     | Разрешить SSH для контейнера `php`                                                                                       |
+| SSL_GENERATE                 | 1                     | Генерировать самоподписанный SSL сертификат                                                                              |
+| NGINX_PORT                   | 80                    | Порт для NGINX                                                                                                           |
+| MARIADB_PORT                 | 3306                  | Порт для MariaDB                                                                                                         |
+| PHPMYADMIN_PORT              | 8080                  | Порт для phpMyAdmin                                                                                                      |
+| MAILHOG_PORT                 | 8025                  | Порт для  MailHog                                                                                                        |
+| SMTP_PORT                    | 1025                  | SMTP порт                                                                                                                |
+| SMTP_HOST                    | mailhog               | SMTP хост                                                                                                                |
 
 ## 🔧 Расширенные возможности
 
