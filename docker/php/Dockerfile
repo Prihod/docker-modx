@@ -37,6 +37,12 @@ ENV MODX_STORAGE_PATH=/usr/local/modx/storage
 ENV MODX_BACKUP_PATH=/usr/local/modx/storage/backup
 ENV MODX_CACHE_SOURCE_PATH=/usr/local/modx/storage/cache
 
+# Debian 11 (bullseye, база php:7.4) снят с основного зеркала — берём пакеты из archive.debian.org
+RUN if grep -q 'VERSION_CODENAME=bullseye' /etc/os-release; then \
+        sed -i 's|http://deb.debian.org|http://archive.debian.org|g' /etc/apt/sources.list; \
+        echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99archive; \
+    fi
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     libpng-dev \
